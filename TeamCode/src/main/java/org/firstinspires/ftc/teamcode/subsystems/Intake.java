@@ -1,8 +1,14 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.Constants.Intake.*;
-import static org.firstinspires.ftc.teamcode.subsystems.Arm.ArmState.HIGH_SCORING;
-import static org.firstinspires.ftc.teamcode.subsystems.Arm.ArmState.HOME;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.clawClosedPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenSmallerPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.clawRegripPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.homePos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.intakePos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.scoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.specimenScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.startPos;
 
 import androidx.annotation.NonNull;
 
@@ -19,7 +25,6 @@ import java.lang.annotation.Target;
 import dev.frozenmilk.dairy.cachinghardware.CachingServo;
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
-import dev.frozenmilk.dairy.core.util.supplier.numeric.MotionComponents;
 import dev.frozenmilk.dairy.core.wrapper.Wrapper;
 import dev.frozenmilk.mercurial.Mercurial;
 import dev.frozenmilk.mercurial.bindings.BoundGamepad;

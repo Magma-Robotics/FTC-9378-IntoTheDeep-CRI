@@ -1,20 +1,13 @@
 package org.firstinspires.ftc.teamcode.tuning;
 
-import static dev.frozenmilk.dairy.pasteurized.Pasteurized.gamepad1;
-
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
-import dev.frozenmilk.dairy.core.util.supplier.logical.EnhancedBooleanSupplier;
-import dev.frozenmilk.dairy.pasteurized.Pasteurized;
 import dev.frozenmilk.mercurial.Mercurial;
 
 @Mercurial.Attach

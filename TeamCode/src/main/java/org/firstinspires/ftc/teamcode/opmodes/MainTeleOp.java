@@ -1,21 +1,18 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-
 import org.firstinspires.ftc.teamcode.Constants;
-import org.firstinspires.ftc.teamcode.commands.*;
-import org.firstinspires.ftc.teamcode.subsystems.*;
-import org.firstinspires.ftc.teamcode.subsystems.Arm.ArmState;
+import org.firstinspires.ftc.teamcode.commands.GroupedCommands;
+import org.firstinspires.ftc.teamcode.subsystems.Arm;
+import org.firstinspires.ftc.teamcode.subsystems.Drive;
+import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Intake.IntakePivotState;
-import org.firstinspires.ftc.teamcode.subsystems.Slides.SlideState;
+import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
 import dev.frozenmilk.mercurial.Mercurial;
-import dev.frozenmilk.mercurial.commands.groups.Parallel;
-import dev.frozenmilk.mercurial.commands.groups.Sequential;
-import dev.frozenmilk.mercurial.commands.util.Wait;
 
 @Mercurial.Attach
 @Arm.Attach

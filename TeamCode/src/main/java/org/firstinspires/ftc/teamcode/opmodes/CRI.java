@@ -9,7 +9,6 @@ import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
 import dev.frozenmilk.mercurial.Mercurial;
-import dev.frozenmilk.mercurial.commands.Lambda;
 
 @Mercurial.Attach
 @Arm.Attach

@@ -1,24 +1,28 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.Constants.Arm.*;
-import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.*;
-import org.firstinspires.ftc.teamcode.util.DoubleComponent;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.highScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.homePos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.intakePos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.midScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.specimenScoringPos;
+import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmD;
+import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmI;
+import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmP;
 
 import androidx.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.util.DoubleComponent;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.function.Consumer;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;

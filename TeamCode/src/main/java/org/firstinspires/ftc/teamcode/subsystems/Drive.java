@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.IMU;
 
@@ -21,7 +20,6 @@ import dev.frozenmilk.dairy.cachinghardware.CachingDcMotor;
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
 import dev.frozenmilk.dairy.core.wrapper.Wrapper;
-import dev.frozenmilk.dairy.pasteurized.SDKGamepad;
 import dev.frozenmilk.mercurial.Mercurial;
 import dev.frozenmilk.mercurial.bindings.BoundGamepad;
 import dev.frozenmilk.mercurial.commands.Lambda;

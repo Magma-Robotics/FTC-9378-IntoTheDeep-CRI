@@ -7,7 +7,6 @@ import com.acmerobotics.dashboard.canvas.Canvas;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.acmerobotics.roadrunner.Action;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.annotation.ElementType;
@@ -22,7 +21,7 @@ import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
 import dev.frozenmilk.dairy.core.wrapper.Wrapper;
 
 public class SilkRoad implements Feature {
-    private Dependency<?> dependency = new SingleAnnotation<>(org.firstinspires.ftc.teamcode.util.SilkRoad.Attach.class);
+    private Dependency<?> dependency = new SingleAnnotation<>(Attach.class);
     private static FtcDashboard dash;
     private static Canvas canvas;
     private static Action actions;
@@ -38,7 +37,7 @@ public class SilkRoad implements Feature {
 
     private SilkRoad() {}
 
-    public static final org.firstinspires.ftc.teamcode.util.SilkRoad INSTANCE = new org.firstinspires.ftc.teamcode.util.SilkRoad();
+    public static final SilkRoad INSTANCE = new SilkRoad();
 
     @Override
     public void postUserInitHook(@NotNull Wrapper opMode) {

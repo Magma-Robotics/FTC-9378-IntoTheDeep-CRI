@@ -1,25 +1,20 @@
 package org.firstinspires.ftc.teamcode.opmodes;
 
-import static org.firstinspires.ftc.teamcode.Constants.Intake.*;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.rotation0Pos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.rotation180Pos;
 
 import com.acmerobotics.dashboard.config.Config;
 import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.MinVelConstraint;
 import com.acmerobotics.roadrunner.ParallelAction;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.SequentialAction;
 import com.acmerobotics.roadrunner.SleepAction;
 import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
-import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
-import com.acmerobotics.roadrunner.ftc.Actions;
-import com.arcrobotics.ftclib.command.WaitCommand;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.commands.GroupedCommands;
 import org.firstinspires.ftc.teamcode.roadrunner.MecanumDrive;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
@@ -29,12 +24,7 @@ import org.firstinspires.ftc.teamcode.subsystems.Slides;
 import org.firstinspires.ftc.teamcode.util.MercurialAction;
 import org.firstinspires.ftc.teamcode.util.SilkRoad;
 
-import java.security.acl.Group;
-
 import dev.frozenmilk.mercurial.Mercurial;
-import dev.frozenmilk.mercurial.commands.groups.Parallel;
-import dev.frozenmilk.mercurial.commands.groups.Sequential;
-import dev.frozenmilk.mercurial.commands.util.Wait;
 
 @Arm.Attach
 @Drive.Attach

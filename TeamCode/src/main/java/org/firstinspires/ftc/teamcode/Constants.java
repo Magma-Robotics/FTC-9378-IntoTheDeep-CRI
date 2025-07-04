@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
 
-import com.acmerobotics.dashboard.config.Config;
-
-
 public class Constants {
     public static final class Drive {
         public static final String leftFront = "leftFront";

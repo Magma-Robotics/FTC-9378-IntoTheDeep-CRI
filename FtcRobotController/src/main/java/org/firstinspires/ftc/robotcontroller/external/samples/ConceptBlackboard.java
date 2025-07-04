@@ -25,7 +25,8 @@
  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
+ *//*
+
 
 package org.firstinspires.ftc.robotcontroller.external.samples;
 
@@ -33,6 +34,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
+*/
 /*
  * Demonstrates how to use an OpMode to store data in the blackboard and retrieve it.
  * This is useful for storing information in Auto and then retrieving it in your TeleOp.
@@ -45,7 +47,8 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
  *
  * The blackboard is a standard hashmap so you can use methods like:
  * put, get, containsKey, remove, etc.
- */
+ *//*
+
 @TeleOp(name = "Concept: Blackboard", group = "Concept")
 @Disabled
 public class ConceptBlackboard extends OpMode {
@@ -54,9 +57,11 @@ public class ConceptBlackboard extends OpMode {
     public static final String TIMES_STARTED_KEY = "Times started";
     public static final String ALLIANCE_KEY = "Alliance";
 
-    /**
+    */
+/**
      * This method will be called once, when the INIT button is pressed.
-     */
+     *//*
+
     @Override
     public void init() {
         // This gets us what is in the blackboard or the default if it isn't in there.
@@ -66,7 +71,8 @@ public class ConceptBlackboard extends OpMode {
         telemetry.addData("OpMode started times", blackboard.get(TIMES_STARTED_KEY));
     }
 
-    /**
+    */
+/**
      * This method will be called repeatedly during the period between when
      * the START button is pressed and when the OpMode is stopped.
      * <p>
@@ -74,7 +80,8 @@ public class ConceptBlackboard extends OpMode {
      * If the right bumper is pressed it will store the value "BLUE" in the blackboard for alliance.
      * <p>
      * You'll notice that if you quit the OpMode and come back in, the value will persist.
-     */
+     *//*
+
     @Override
     public void loop() {
         if (gamepad1.left_bumper) {
@@ -85,3 +92,4 @@ public class ConceptBlackboard extends OpMode {
         telemetry.addData("Alliance", blackboard.get(ALLIANCE_KEY));
     }
 }
+*/

@@ -1,10 +1,10 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
-import static org.firstinspires.ftc.teamcode.Constants.Slides.*;
-import org.firstinspires.ftc.teamcode.util.DoubleComponent;
-import static org.firstinspires.ftc.teamcode.config.SlidesPIDConfig.SlidesD;
-import static org.firstinspires.ftc.teamcode.config.SlidesPIDConfig.SlidesI;
-import static org.firstinspires.ftc.teamcode.config.SlidesPIDConfig.SlidesP;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.highScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.homePos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.intakePos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.midScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.specimenScoringPos;
 
 import androidx.annotation.NonNull;
 
@@ -23,7 +23,6 @@ import java.lang.annotation.Target;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
-import dev.frozenmilk.dairy.core.util.controller.implementation.DoubleController;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.CachedMotionComponentSupplier;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.EnhancedDoubleSupplier;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.MotionComponents;
