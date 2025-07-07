@@ -23,8 +23,10 @@ import dev.frozenmilk.mercurial.Mercurial;
 @Config
 @TeleOp(name="Tuning", group = "Tuning")
 public class Tuning extends OpMode {
-    public static double armTarget, slidesTarget, pivot, intake = 0;
-    public static double rotate = 0.5;
+    public static double armTarget, slidesTarget;
+    public static double pitch = 150;
+    public static double roll = 0;
+    public static double intake = 0.9;
 
     @Override
     public void init() {
@@ -58,9 +60,8 @@ public class Tuning extends OpMode {
     public void loop() {
         Arm.INSTANCE.setTarget(armTarget);
         Slides.INSTANCE.setTarget(slidesTarget);
-        Intake.INSTANCE.setPivotPosition(pivot);
+        //Intake.INSTANCE.setWristPosition(pitch, roll);
         Intake.INSTANCE.setClawPosition(intake);
-        Intake.INSTANCE.setRotation(rotate);
         telemetry.addData("Arm Target: ", armTarget);
         telemetry.addData("Slides Target: ", slidesTarget);
         telemetry.addData("Arm Position: ", Arm.INSTANCE.getEncoder());

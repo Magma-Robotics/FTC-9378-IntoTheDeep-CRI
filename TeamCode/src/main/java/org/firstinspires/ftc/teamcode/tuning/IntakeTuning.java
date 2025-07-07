@@ -15,9 +15,9 @@ import dev.frozenmilk.mercurial.Mercurial;
 @Config
 @TeleOp(name="IntakeTuning", group = "Tuning")
 public class IntakeTuning extends OpMode {
-    public static double pivot = 0;
-    public static double intake = 0;
-    public static double rotate = 0;
+    public static double pitch = 150;
+    public static double intake = 0.9;
+    public static double roll = 0;
 
     @Override
     public void init() {
@@ -26,9 +26,8 @@ public class IntakeTuning extends OpMode {
 
     @Override
     public void loop() {
-        Intake.INSTANCE.setPivotPosition(pivot);
+        Intake.INSTANCE.setWristPosition(pitch, roll);
         Intake.INSTANCE.setClawPosition(intake);
-        Intake.INSTANCE.setRotation(rotate);
         telemetry.update();
     }
 }

@@ -5,6 +5,9 @@ import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
+import dev.frozenmilk.dairy.core.util.supplier.numeric.MotionComponents;
+import dev.frozenmilk.mercurial.Mercurial;
+import dev.frozenmilk.mercurial.bindings.BoundGamepad;
 import dev.frozenmilk.mercurial.commands.groups.CommandGroup;
 import dev.frozenmilk.mercurial.commands.groups.Parallel;
 import dev.frozenmilk.mercurial.commands.groups.Sequential;
@@ -60,6 +63,14 @@ public class GroupedCommands {
        }
    }*/
 
+    public CommandGroup extendSlidesAndArm() {
+        BoundGamepad gamepad2 = Mercurial.gamepad2();
+        return new Parallel(
+                Arm.INSTANCE.runToPosition(800 + gamepad2.rightTrigger().state()*775),
+                Slides.INSTANCE.runToPosition(500 + gamepad2.rightTrigger().state()*2500)
+        );
+    }
+
     public CommandGroup intakeToHomeCommand() {
         return new Parallel(
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME),
@@ -73,7 +84,7 @@ public class GroupedCommands {
                 Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME),
                 new Sequential(
                         new Wait(0.3),
-                        Intake.INSTANCE.setIntakeRotation(Constants.Intake.rotation0Pos),
+                        //Intake.INSTANCE.setWristPosition(),
                         Slides.INSTANCE.setSlidePosition(Slides.SlideState.HOME)
                 ),
                 new Sequential(

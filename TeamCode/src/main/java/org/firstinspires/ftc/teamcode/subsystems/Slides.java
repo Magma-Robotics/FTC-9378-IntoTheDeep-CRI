@@ -14,6 +14,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.config.SlidesPIDConfig;
+import org.firstinspires.ftc.teamcode.util.DoubleComponent;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Inherited;
@@ -23,6 +25,7 @@ import java.lang.annotation.Target;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
+import dev.frozenmilk.dairy.core.util.controller.implementation.DoubleController;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.CachedMotionComponentSupplier;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.EnhancedDoubleSupplier;
 import dev.frozenmilk.dairy.core.util.supplier.numeric.MotionComponents;
@@ -95,7 +98,7 @@ public class Slides extends SDKSubsystem {
         }*/
         return Double.NaN;
     });
-    /*private final Cell<DoubleController> controller = subsystemCell(() ->
+    private final Cell<DoubleController> controller = subsystemCell(() ->
             new DoubleController(
                     targetSupplier,
                     encoder.get(),
@@ -103,32 +106,32 @@ public class Slides extends SDKSubsystem {
                     (Double power) -> {
                         slides.get().setPower(power);
                     },
-                    new DoubleComponent.P(MotionComponents.STATE, () -> SlidesP)
-                            .plus(new DoubleComponent.I(MotionComponents.STATE, () -> SlidesI))
-                            .plus(new DoubleComponent.D(MotionComponents.STATE, () -> SlidesD))
+                    new DoubleComponent.P(MotionComponents.STATE, () -> SlidesPIDConfig.SlidesP)
+                            .plus(new DoubleComponent.I(MotionComponents.STATE, () -> SlidesPIDConfig.SlidesI))
+                            .plus(new DoubleComponent.D(MotionComponents.STATE, () -> SlidesPIDConfig.SlidesD))
             )
-    );*/
+    );
 
 
     //set Target method
     public void setTarget(double target) {
-        //controller.get().setEnabled(true);
+        controller.get().setEnabled(true);
         this.targetPos = target;
         targetSupplier.reset();
     }
 
     public void retract() {
-        //controller.get().setEnabled(false);
+        controller.get().setEnabled(false);
         slides.get().setPower(-0.5);
     }
 
     public void extend() {
-        //controller.get().setEnabled(false);
+        controller.get().setEnabled(false);
         slides.get().setPower(0.5);
     }
 
     public void stop() {
-        //controller.get().setEnabled(false);
+        controller.get().setEnabled(false);
         slides.get().setPower(0);
         //setTarget(0);
     }
@@ -170,9 +173,9 @@ public class Slides extends SDKSubsystem {
         return (encoder.get().state());
     }
 
-    /*public boolean getControllerFinished() {
+    public boolean getControllerFinished() {
         return (controller.get().finished());
-    }*/
+    }
 
     public void resetEncoder() {
         slides.get().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -184,13 +187,13 @@ public class Slides extends SDKSubsystem {
     public void preUserInitHook(@NonNull Wrapper opMode) {
         slides.get().setDirection(DcMotorSimple.Direction.REVERSE);
         slides.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        //controller.get().setEnabled(false);
+        controller.get().setEnabled(false);
     }
 
     //start hook
     @Override
     public void preUserStartHook(@NonNull Wrapper opMode) {
-        //controller.get().setEnabled(false);
+        controller.get().setEnabled(true);
     }
 
     public Lambda retractSlides() {

@@ -114,6 +114,25 @@ public class Intake extends SDKSubsystem {
         intake.get().setPosition(position);
     }
 
+    public void setWristPosition(double pitch, double roll) {
+        if (pitch > 250) {
+            pitch = 250;
+        }
+        else if (pitch < 50) {
+            pitch = 50;
+        }
+        if (roll > 190) {
+            roll = 190;
+        }
+        else if (roll < -220) {
+            roll = -220;
+        }
+        double leftServoAngle = (pitch + (roll/2)) / 300;
+        double rightServoAngle = (pitch - (roll/2)) / 300;
+        intakePivotLeft.get().setPosition(leftServoAngle);
+        intakePivotRight.get().setPosition(rightServoAngle);
+    }
+
     public void setRotation(double rotation) {
         //rotatingIntake.get().setPosition(rotation);
     }
@@ -164,15 +183,14 @@ public class Intake extends SDKSubsystem {
     @Override
     public void preUserInitHook(@NonNull Wrapper opMode) {
         intakePivotRight.get().setDirection(Servo.Direction.REVERSE);
-        intake.get().setDirection(Servo.Direction.REVERSE);
+        intake.get().setDirection(Servo.Direction.FORWARD);
     }
 
     public Lambda setWristControl() {
         BoundGamepad gamepad2 = Mercurial.gamepad2();
         return new Lambda("setWristControl")
                 .setExecute(() -> {
-                    intakePivotLeft.get().setPosition(gamepad2.leftStickY().state());
-                    intakePivotRight.get().setPosition(gamepad2.rightStickY().state());
+                    setWristPosition((-gamepad2.leftStickY().state() + 1)/2*300, gamepad2.leftStickX().state()*220);
                 });
     }
 

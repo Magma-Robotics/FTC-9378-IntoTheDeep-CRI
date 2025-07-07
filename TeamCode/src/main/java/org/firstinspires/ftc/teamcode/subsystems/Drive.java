@@ -58,8 +58,8 @@ public class Drive extends SDKSubsystem {
     final Cell<IMU> imu = subsystemCell(() -> getHardwareMap().get(IMU.class, "imu"));
     // Adjust the orientation parameters to match your robot
     IMU.Parameters parameters = new IMU.Parameters(new RevHubOrientationOnRobot(
-            RevHubOrientationOnRobot.LogoFacingDirection.RIGHT,
-            RevHubOrientationOnRobot.UsbFacingDirection.UP));
+            RevHubOrientationOnRobot.LogoFacingDirection.UP,
+            RevHubOrientationOnRobot.UsbFacingDirection.LEFT));
 
     @Override
     public void preUserInitHook(@NonNull Wrapper opMode) {
@@ -180,4 +180,15 @@ public class Drive extends SDKSubsystem {
                 .setFinish(() -> false);
     }
 
+    public Lambda tankDriveCommand() {
+        BoundGamepad gamepad1 = Mercurial.gamepad1();
+        return new Lambda("tankDriveCommand")
+                .setRequirements(this)
+                .setExecute(() -> {
+                    leftFront.get().setPower(-gamepad1.leftStickY().state());
+                    leftBack.get().setPower(-gamepad1.leftStickY().state());
+                    rightFront.get().setPower(-gamepad1.rightStickY().state());
+                    rightBack.get().setPower(-gamepad1.rightStickY().state());
+                });
+    }
 }

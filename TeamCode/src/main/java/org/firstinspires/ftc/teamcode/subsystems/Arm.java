@@ -194,7 +194,7 @@ public class Arm extends SDKSubsystem {
     //start hook
     @Override
     public void preUserStartHook(@NonNull Wrapper opMode) {
-        controller.get().setEnabled(false);
+        controller.get().setEnabled(true);
     }
 
     public Lambda armUp() {
@@ -214,8 +214,8 @@ public class Arm extends SDKSubsystem {
 
     public Lambda runToPosition(double target) {
         return new Lambda("run_to_position-arm")
-                .setInit(() -> setTarget(target));
-                //.setFinish(() -> controller.get().finished());
+                .setInit(() -> setTarget(target))
+                .setFinish(() -> controller.get().finished());
     }
     public Lambda setArmPosition(ArmState armState) {
         return new Lambda("setArmPosition")
