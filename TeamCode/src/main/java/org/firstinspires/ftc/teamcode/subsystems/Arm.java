@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.robotcore.external.navigation.CurrentUnit;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -69,13 +70,14 @@ public class Arm extends SDKSubsystem {
     public static ArmState armState = ArmState.HOME;
 
     //motors
-    private final Cell<DcMotorEx> arm = subsystemCell(() -> getHardwareMap().get(DcMotorEx.class, Constants.Arm.arm));
+    private final Cell<DcMotorEx> leftPivot = subsystemCell(() -> getHardwareMap().get(DcMotorEx.class, Constants.Arm.leftPivot));
+    private final Cell<DcMotorEx> rightPivot = subsystemCell(() -> getHardwareMap().get(DcMotorEx.class, Constants.Arm.rightPivot));
 
 
     //encoder
-    private final Cell<EnhancedDoubleSupplier> encoder = subsystemCell(() -> new EnhancedDoubleSupplier(() -> (double) arm.get().getCurrentPosition()));
+    private final Cell<EnhancedDoubleSupplier> encoder = subsystemCell(() -> new EnhancedDoubleSupplier(() -> (double) leftPivot.get().getCurrentPosition()));
     //current of motor
-    private final Cell<EnhancedDoubleSupplier> current = subsystemCell(() -> new EnhancedDoubleSupplier(() -> arm.get().getCurrent(CurrentUnit.AMPS)));
+    private final Cell<EnhancedDoubleSupplier> current = subsystemCell(() -> new EnhancedDoubleSupplier(() -> leftPivot.get().getCurrent(CurrentUnit.AMPS)));
 
     //controller
     private double targetPos = 0.0;
@@ -106,7 +108,8 @@ public class Arm extends SDKSubsystem {
                     encoder.get(),
                     toleranceSupplier,
                     (Double power) -> {
-                        arm.get().setPower(power);
+                        leftPivot.get().setPower(power);
+                        rightPivot.get().setPower(power);
                     },
                     new DoubleComponent.P(MotionComponents.STATE, () -> ArmP)
                             .plus(new DoubleComponent.I(MotionComponents.STATE, () -> ArmI))
@@ -117,17 +120,20 @@ public class Arm extends SDKSubsystem {
 
     public void up() {
         controller.get().setEnabled(false);
-        arm.get().setPower(1);
+        leftPivot.get().setPower(1);
+        rightPivot.get().setPower(1);
     }
 
     public void down() {
         controller.get().setEnabled(false);
-        arm.get().setPower(-1);
+        leftPivot.get().setPower(-1);
+        rightPivot.get().setPower(-1);
     }
 
     public void stop() {
         controller.get().setEnabled(false);
-        arm.get().setPower(0);
+        leftPivot.get().setPower(0);
+        rightPivot.get().setPower(0);
     }
 
 
@@ -180,14 +186,17 @@ public class Arm extends SDKSubsystem {
     }
 
     public void resetEncoder() {
-        arm.get().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        leftPivot.get().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        rightPivot.get().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         targetSupplier.reset();
     }
 
     //init hook
     @Override
     public void preUserInitHook(@NonNull Wrapper opMode) {
-        arm.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        leftPivot.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightPivot.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        rightPivot.get().setDirection(DcMotorSimple.Direction.REVERSE);
         controller.get().setEnabled(false);
     }
 

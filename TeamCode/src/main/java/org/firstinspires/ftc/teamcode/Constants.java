@@ -13,7 +13,8 @@ public class Constants {
 
 
     public static final class Arm {
-        public static final String arm = "arm";
+        public static final String leftPivot = "leftPivot";
+        public static final String rightPivot = "rightPivot";
         public static final double highScoringPos = 6000.0;
         public static final double midScoringPos = 0.0;
         public static final double specimenScoringPos = 1200.0;
