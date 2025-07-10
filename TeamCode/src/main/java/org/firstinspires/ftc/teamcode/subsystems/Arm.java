@@ -117,12 +117,12 @@ public class Arm extends SDKSubsystem {
 
     public void up() {
         controller.get().setEnabled(false);
-        arm.get().setPower(0.5);
+        arm.get().setPower(1);
     }
 
     public void down() {
         controller.get().setEnabled(false);
-        arm.get().setPower(-0.5);
+        arm.get().setPower(-1);
     }
 
     public void stop() {

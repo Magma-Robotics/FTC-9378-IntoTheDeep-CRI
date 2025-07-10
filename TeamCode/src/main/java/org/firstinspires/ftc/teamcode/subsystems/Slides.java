@@ -122,12 +122,12 @@ public class Slides extends SDKSubsystem {
 
     public void retract() {
         controller.get().setEnabled(false);
-        slides.get().setPower(-0.5);
+        slides.get().setPower(-1);
     }
 
     public void extend() {
         controller.get().setEnabled(false);
-        slides.get().setPower(0.5);
+        slides.get().setPower(1);
     }
 
     public void stop() {
