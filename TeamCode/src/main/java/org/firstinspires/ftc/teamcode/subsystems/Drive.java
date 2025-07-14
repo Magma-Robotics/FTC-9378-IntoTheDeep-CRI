@@ -106,11 +106,23 @@ public class Drive extends SDKSubsystem {
                     double frontRightPower2 = (y - x - rx) / denominator;
                     double backRightPower2 = (y + x - rx) / denominator;
 
-                    if (isFieldCentric) {
+                    if (isFieldCentric && gamepad1.rightBumper().state()) {
+                        leftFront.get().setPower(frontLeftPower / 5);
+                        leftBack.get().setPower(backLeftPower / 5);
+                        rightFront.get().setPower(frontRightPower / 5);
+                        rightBack.get().setPower(backRightPower / 5);
+                    }
+                    else if (isFieldCentric) {
                         leftFront.get().setPower(frontLeftPower);
                         leftBack.get().setPower(backLeftPower);
                         rightFront.get().setPower(frontRightPower);
                         rightBack.get().setPower(backRightPower);
+                    }
+                    else if (gamepad1.rightBumper().state()) {
+                        leftFront.get().setPower(frontLeftPower2);
+                        leftBack.get().setPower(backLeftPower2);
+                        rightFront.get().setPower(frontRightPower2);
+                        rightBack.get().setPower(backRightPower2);
                     }
                     else {
                         leftFront.get().setPower(frontLeftPower2);

@@ -4,10 +4,11 @@ import static org.firstinspires.ftc.teamcode.Constants.Intake.clawClosedPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenSmallerPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawRegripPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.homePos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.intakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.scoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.specimenScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Intake.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.startPos;
 
 import androidx.annotation.NonNull;
@@ -59,6 +60,7 @@ public class Intake extends SDKSubsystem {
         START,
         SCORING,
         SPECIMEN_SCORING,
+        ROTATED_INTAKE,
         INTAKE,
         HOME
     }
@@ -85,27 +87,24 @@ public class Intake extends SDKSubsystem {
     public double getPivotPosition() {
         return intakePivotLeft.get().getPosition();
     }
-    public void setPivot(IntakePivotState intakePivotState) {
+    public void setWristPos(IntakePivotState intakePivotState) {
         switch (intakePivotState) {
             case SCORING:
-                intakePivotLeft.get().setPosition(scoringPos);
-                intakePivotRight.get().setPosition(scoringPos);
+                setWristPosition(Constants.Intake.highScoringWristPos.first, Constants.Intake.highScoringWristPos.second);
                 break;
             case SPECIMEN_SCORING:
-                intakePivotLeft.get().setPosition(specimenScoringPos);
-                intakePivotRight.get().setPosition(specimenScoringPos);
+                setWristPosition(Constants.Intake.highSpecimenWristPos.first, Constants.Intake.highSpecimenWristPos.second);
                 break;
+            case ROTATED_INTAKE:
+                setWristPosition(Constants.Intake.rotatedIntakeWristPos.first, Constants.Intake.rotatedIntakeWristPos.second);
             case INTAKE:
-                intakePivotLeft.get().setPosition(intakePos);
-                intakePivotRight.get().setPosition(intakePos);
+                setWristPosition(Constants.Intake.intakeWristPos.first, Constants.Intake.intakeWristPos.second);
                 break;
             case HOME:
-                intakePivotLeft.get().setPosition(homePos);
-                intakePivotRight.get().setPosition(homePos);
+                setWristPosition(Constants.Intake.homeWristPos.first, Constants.Intake.homeWristPos.second);
                 break;
             case START:
-                intakePivotLeft.get().setPosition(startPos);
-                intakePivotRight.get().setPosition(startPos);
+                setWristPosition(Constants.Intake.startWristPos.first, Constants.Intake.startWristPos.second);
         }
         Intake.intakePivotState = intakePivotState;
     }
@@ -124,8 +123,8 @@ public class Intake extends SDKSubsystem {
         if (roll > 190) {
             roll = 190;
         }
-        else if (roll < -220) {
-            roll = -220;
+        else if (roll < -230) {
+            roll = -230;
         }
         double leftServoAngle = (pitch + (roll/2)) / 300;
         double rightServoAngle = (pitch - (roll/2)) / 300;
@@ -196,7 +195,7 @@ public class Intake extends SDKSubsystem {
 
     public Lambda setIntakePivot(IntakePivotState intakePivotState) {
         return new Lambda("setIntakePivot")
-                .setInit(() -> setPivot(intakePivotState));
+                .setInit(() -> setWristPos(intakePivotState));
     }
 
     public Lambda setClawOpen(boolean open) {

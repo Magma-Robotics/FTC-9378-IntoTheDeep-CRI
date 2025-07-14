@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import static org.firstinspires.ftc.teamcode.Constants.Arm.highScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.homePos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.intakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.midScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Arm.specimenScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmD;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmI;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmP;
@@ -153,7 +154,7 @@ public class Arm extends SDKSubsystem {
                 setTarget(midScoringPos);
                 break;
             case SPECIMEN_SCORING:
-                setTarget(specimenScoringPos);
+                setTarget(highSpecimenScoringPos);
                 break;
             case INTAKE:
                 setTarget(intakePos);
@@ -196,7 +197,7 @@ public class Arm extends SDKSubsystem {
     public void preUserInitHook(@NonNull Wrapper opMode) {
         leftPivot.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         rightPivot.get().setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-        rightPivot.get().setDirection(DcMotorSimple.Direction.REVERSE);
+        leftPivot.get().setDirection(DcMotorSimple.Direction.REVERSE);
         controller.get().setEnabled(false);
     }
 

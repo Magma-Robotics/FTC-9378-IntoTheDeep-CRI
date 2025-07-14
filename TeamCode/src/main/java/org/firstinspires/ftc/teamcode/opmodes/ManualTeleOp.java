@@ -43,17 +43,17 @@ public class ManualTeleOp extends OpMode {
                 .onFalse(Arm.INSTANCE.stopArm());
         Mercurial.gamepad2().rightBumper()
                 .onTrue(Intake.INSTANCE.setClawOpenAndClose());
-        /*Mercurial.gamepad2().rightTrigger().conditionalBindState().greaterThanEqualTo(0.01).bind()
-                .onTrue(GroupedCommands.INSTANCE.extendSlidesAndArm());*/
+        Mercurial.gamepad2().rightTrigger().conditionalBindState().greaterThanEqualTo(0.01).bind()
+                .whileTrue(GroupedCommands.INSTANCE.extendSlidesAndArm(Mercurial.gamepad2().rightTrigger().state()));
     }
 
     @Override
     public void loop() {
-        if (rightBumper.onTrue()) {
+        /*if (rightBumper.onTrue()) {
             Drive.INSTANCE.setDefaultCommand(Drive.INSTANCE.slowDriveCommand(true));
         }
         if (rightBumper.onFalse()) {
             Drive.INSTANCE.setDefaultCommand(Drive.INSTANCE.driveCommand(true));
-        }
+        }*/
     }
 }

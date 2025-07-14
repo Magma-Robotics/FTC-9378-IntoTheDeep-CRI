@@ -1,10 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
 import static org.firstinspires.ftc.teamcode.Constants.Slides.highScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.homePos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.intakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.midScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Slides.specimenScoringPos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.highSpecimenScoringPos;
 
 import androidx.annotation.NonNull;
 
@@ -145,7 +146,7 @@ public class Slides extends SDKSubsystem {
                 setTarget(midScoringPos);
                 break;
             case SPECIMEN_SCORING:
-                setTarget(specimenScoringPos);
+                setTarget(highSpecimenScoringPos);
                 break;
             case INTAKE:
                 setTarget(intakePos);

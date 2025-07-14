@@ -15,20 +15,22 @@ public class Constants {
     public static final class Arm {
         public static final String leftPivot = "leftPivot";
         public static final String rightPivot = "rightPivot";
-        public static final double highScoringPos = 6000.0;
-        public static final double midScoringPos = 0.0;
-        public static final double specimenScoringPos = 1200.0;
-        public static final double intakePos = 1600.0;
-        public static final double homePos = 0.0;
+        public static final double highScoringPos = 5700.0;
+        public static final double midScoringPos = 5700.0;
+        public static final double highSpecimenScoringPos = 2800.0;
+        public static final double lowSpecimenScoringPos = 1200.0;
+        public static final double intakePos = 1300.0;
+        public static final double homePos = 1500.0;
     }
 
 
     public static final class Slides {
         public static final String slides = "slides";
-        public static final double highScoringPos = 2250.0;
-        public static final double midScoringPos = 0.0;
-        public static final double specimenScoringPos = 0.0;
-        public static final double intakePos = 1600.0;
+        public static final double highScoringPos = 2000.0;
+        public static final double midScoringPos = 500.0;
+        public static final double highSpecimenScoringPos = 550;
+        public static final double lowSpecimenScoringPos = 0.0;
+        public static final double intakePos = 1800.0;
         public static final double homePos = 0.0;
     }
 
@@ -42,23 +44,27 @@ public class Constants {
         //ignore for now too lazy to remove
         public static final double startPos = 0.0;
         public static final double scoringPos = 0.33;
-        public static final double specimenScoringPos = 0.6;
+        public static final double highSpecimenScoringPos = 0.6;
         public static final double intakePos = 0.96;
         public static final double homePos = 0.68;
-        public static final double clawOpenSmallerPos = 0.38;
-        public static final double clawRegripPos = 0.26;
         public static final double rotation0Pos = 0.0;
         public static final double rotation90Pos = 0.3;
         public static final double rotation180Pos = 0.64;
 
+        public static final double clawOpenSmallerPos = 0.87;
         public static final double clawOpenPos = 0.9;
         public static final double clawClosedPos = 0.75;
+        public static final double clawRegripPos = 0.79;
 
         //pitch and roll
         public static final Pair<Double, Double> homeWristPos = new Pair<>(150.0, 0.0);
-        public static final Pair<Double, Double> highScoringWristPos = new Pair<>(150.0, 60.0);
+        public static final Pair<Double, Double> rotatedIntakeWristPos = new Pair<>(90.0, 190.0);
+        public static final Pair<Double, Double> intakeWristPos = new Pair<>(90.0, 0.0);
+        public static final Pair<Double, Double> highScoringWristPos = new Pair<>(240.0, 0.0);
+        public static final Pair<Double, Double> midScoringWristPos = new Pair<>(240.0, 0.0);
         public static final Pair<Double, Double> startWristPos = new Pair<>(150.0, 0.0);
-        public static final Pair<Double, Double> specimenWristPos = new Pair<>(150.0, 0.0);
+        public static final Pair<Double, Double> highSpecimenWristPos = new Pair<>(230.0, 0.0);
+        public static final Pair<Double, Double> lowSpecimenWristPos = new Pair<>(240.0, 0.0);
     }
 
 

@@ -63,11 +63,10 @@ public class GroupedCommands {
        }
    }*/
 
-    public CommandGroup extendSlidesAndArm() {
-        BoundGamepad gamepad2 = Mercurial.gamepad2();
+    public CommandGroup extendSlidesAndArm(double triggerValue) {
         return new Parallel(
-                Arm.INSTANCE.runToPosition(800 + gamepad2.rightTrigger().state()*775),
-                Slides.INSTANCE.runToPosition(500 + gamepad2.rightTrigger().state()*2500)
+                Arm.INSTANCE.runToPosition(800 + triggerValue*500),
+                Slides.INSTANCE.runToPosition(400 + triggerValue*1400)
         );
     }
 
@@ -97,6 +96,7 @@ public class GroupedCommands {
     public CommandGroup setSpecimenCommand() {
         return new Parallel(
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.SPECIMEN_SCORING),
+                Slides.INSTANCE.setSlidePosition(Slides.SlideState.SPECIMEN_SCORING),
                 Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SPECIMEN_SCORING)
         );
     }
@@ -137,16 +137,16 @@ public class GroupedCommands {
     public CommandGroup grabSample() {
         return new Parallel(
                 //move arm down
-                Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME),
+                Arm.INSTANCE.runToPosition(1150),
                 //grab
                 new Sequential(
-                        new Wait(0.25),
+                        new Wait(0.15),
                         Intake.INSTANCE.setClawOpen(false)
                 ),
 
                 //move arm back up
                 new Sequential(
-                        new Wait(0.35),
+                        new Wait(0.25),
                         Arm.INSTANCE.setArmPosition(Arm.ArmState.INTAKE)
                 )
         );
@@ -155,7 +155,6 @@ public class GroupedCommands {
     public CommandGroup setScoringCommand() {
         return new Parallel(
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.HIGH_SCORING),
-                Intake.INSTANCE.setIntakeRotation(Constants.Intake.rotation90Pos),
                 new Sequential(
                         new Wait(0.7),
                         Slides.INSTANCE.setSlidePosition(Slides.SlideState.HIGH_SCORING)

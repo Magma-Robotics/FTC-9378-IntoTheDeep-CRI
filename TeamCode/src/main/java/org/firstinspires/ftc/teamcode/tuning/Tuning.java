@@ -60,7 +60,7 @@ public class Tuning extends OpMode {
     public void loop() {
         Arm.INSTANCE.setTarget(armTarget);
         Slides.INSTANCE.setTarget(slidesTarget);
-        //Intake.INSTANCE.setWristPosition(pitch, roll);
+        Intake.INSTANCE.setWristPosition(pitch, roll);
         Intake.INSTANCE.setClawPosition(intake);
         telemetry.addData("Arm Target: ", armTarget);
         telemetry.addData("Slides Target: ", slidesTarget);
