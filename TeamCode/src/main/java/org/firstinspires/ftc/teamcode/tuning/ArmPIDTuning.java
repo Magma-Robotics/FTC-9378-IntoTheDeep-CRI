@@ -40,7 +40,7 @@ public class ArmPIDTuning extends OpMode {
         gamepad2().dpadRight()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE));
         gamepad2().dpadLeft()
-                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING));
+                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING));
         gamepad2().dpadDown()
                 .onTrue(Intake.INSTANCE.setClawOpen(true));
         gamepad2().y()

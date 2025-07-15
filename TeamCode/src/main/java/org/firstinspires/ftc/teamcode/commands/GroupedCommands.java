@@ -1,13 +1,11 @@
 package org.firstinspires.ftc.teamcode.commands;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
-import dev.frozenmilk.dairy.core.util.supplier.numeric.MotionComponents;
-import dev.frozenmilk.mercurial.Mercurial;
-import dev.frozenmilk.mercurial.bindings.BoundGamepad;
+import java.util.function.DoubleSupplier;
+
 import dev.frozenmilk.mercurial.commands.groups.CommandGroup;
 import dev.frozenmilk.mercurial.commands.groups.Parallel;
 import dev.frozenmilk.mercurial.commands.groups.Sequential;
@@ -63,14 +61,22 @@ public class GroupedCommands {
        }
    }*/
 
-    public CommandGroup extendSlidesAndArm(double triggerValue) {
+    public CommandGroup extendSlidesAndArm(DoubleSupplier triggerValue) {
         return new Parallel(
-                Arm.INSTANCE.runToPosition(800 + triggerValue*500),
-                Slides.INSTANCE.runToPosition(400 + triggerValue*1400)
+                Arm.INSTANCE.runToPosition(800 + triggerValue.getAsDouble()*500),
+                Slides.INSTANCE.runToPosition(400 + triggerValue.getAsDouble()*1400)
         );
     }
 
     public CommandGroup intakeToHomeCommand() {
+        return new Parallel(
+                Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME),
+                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.PROTECTED_HOME),
+                Slides.INSTANCE.setSlidePosition(Slides.SlideState.HOME)
+        );
+    }
+
+    public CommandGroup specimenIntakeCommand() {
         return new Parallel(
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME),
                 Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME),
@@ -78,18 +84,26 @@ public class GroupedCommands {
         );
     }
 
+    public CommandGroup specimenPickupCommand() {
+        return new Parallel(
+                Arm.INSTANCE.setArmPosition(Arm.ArmState.SPECIMEN_SCORING),
+                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.PROTECTED_HOME)
+        );
+    }
+
     public CommandGroup scoringToHomeCommand() {
         return new Parallel(
                 Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME),
                 new Sequential(
-                        new Wait(0.3),
+                        new Wait(0.4),
                         //Intake.INSTANCE.setWristPosition(),
                         Slides.INSTANCE.setSlidePosition(Slides.SlideState.HOME)
                 ),
                 new Sequential(
                         new Wait(1),
                         Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME)
-                )
+                ),
+                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.PROTECTED_HOME)
         );
     }
 
@@ -140,31 +154,48 @@ public class GroupedCommands {
                 Arm.INSTANCE.runToPosition(1150),
                 //grab
                 new Sequential(
-                        new Wait(0.15),
+                        new Wait(0.06),
                         Intake.INSTANCE.setClawOpen(false)
                 ),
 
                 //move arm back up
                 new Sequential(
-                        new Wait(0.25),
+                        new Wait(0.23),
                         Arm.INSTANCE.setArmPosition(Arm.ArmState.INTAKE)
                 )
         );
     }
 
-    public CommandGroup setScoringCommand() {
+    public CommandGroup setHighScoringCommand() {
         return new Parallel(
+                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME),
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.HIGH_SCORING),
                 new Sequential(
-                        new Wait(0.7),
+                        new Wait(1.3),
                         Slides.INSTANCE.setSlidePosition(Slides.SlideState.HIGH_SCORING)
                 ),
                 new Sequential(
-                        new Wait(1.5),
-                        Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING)
+                        new Wait(2),
+                        Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING)
                 )
         );
     }
+
+    public CommandGroup setMidScoringCommand() {
+        return new Parallel(
+                Arm.INSTANCE.setArmPosition(Arm.ArmState.MID_SCORING),
+                new Sequential(
+                        new Wait(0.7),
+                        Slides.INSTANCE.setSlidePosition(Slides.SlideState.MID_SCORING)
+                ),
+                new Sequential(
+                        new Wait(1.5),
+                        Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.MID_SCORING)
+                )
+        );
+    }
+
+
     public CommandGroup autoSetScoringCommand() {
         return new Parallel(
                 Arm.INSTANCE.setArmPosition(Arm.ArmState.HIGH_SCORING),
@@ -174,7 +205,7 @@ public class GroupedCommands {
                 ),
                 new Sequential(
                         new Wait(1.5),
-                        Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING)
+                        Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING)
                 )
         );
     }
@@ -196,7 +227,7 @@ public class GroupedCommands {
 
     public CommandGroup scoreSpecimenBackwardsCommand() {
         return new Parallel(
-                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING),
+                Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING),
                 new Sequential(
                         new Wait(1),
                         Intake.INSTANCE.setClawOpen(false)

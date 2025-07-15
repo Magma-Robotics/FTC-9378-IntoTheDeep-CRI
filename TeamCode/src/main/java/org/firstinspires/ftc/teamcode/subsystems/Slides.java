@@ -23,6 +23,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.function.DoubleSupplier;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
@@ -137,6 +138,11 @@ public class Slides extends SDKSubsystem {
         //setTarget(0);
     }
 
+    public void slidePower(double power) {
+        controller.get().setEnabled(false);
+        slides.get().setPower(power);
+    }
+
     public void setSlides(SlideState slideState) {
         switch (slideState) {
             case HIGH_SCORING:
@@ -210,6 +216,11 @@ public class Slides extends SDKSubsystem {
     public Lambda stopSlides() {
         return new Lambda("stopSlides")
                 .setInit(() -> stop());
+    }
+
+    public Lambda setSlidePower(DoubleSupplier power) {
+        return new Lambda("setSlidePower")
+                .setInit(() -> slidePower(power.getAsDouble()));
     }
 
     public Lambda runToPosition(double target) {

@@ -34,7 +34,7 @@ public class TestTeleop extends OpMode {
         /*Mercurial.gamepad2().a()
                 .onTrue(Arm.INSTANCE.setArmPosition(ArmState.SPECIMEN_SCORING));*/
         Mercurial.gamepad2().b()
-                .onTrue(GroupedCommands.INSTANCE.setScoringCommand());
+                .onTrue(GroupedCommands.INSTANCE.setHighScoringCommand());
         Mercurial.gamepad2().x()
                 .onTrue(GroupedCommands.INSTANCE.extendIntakeCommand());
         /*Mercurial.gamepad2().y()
@@ -46,7 +46,7 @@ public class TestTeleop extends OpMode {
         Mercurial.gamepad2().dpadLeft()
                 .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.INTAKE));
         Mercurial.gamepad2().dpadRight()
-                .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.SCORING));
+                .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.HIGH_SCORING));
         Mercurial.gamepad2().leftStickButton()
                 .onTrue(Intake.INSTANCE.setIntakeRotation(Constants.Intake.rotation0Pos));
         Mercurial.gamepad2().rightStickButton()

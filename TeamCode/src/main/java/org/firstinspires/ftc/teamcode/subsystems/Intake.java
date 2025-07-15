@@ -4,12 +4,6 @@ import static org.firstinspires.ftc.teamcode.Constants.Intake.clawClosedPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawOpenSmallerPos;
 import static org.firstinspires.ftc.teamcode.Constants.Intake.clawRegripPos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.highSpecimenScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.homePos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.intakePos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.scoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.highSpecimenScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Intake.startPos;
 
 import androidx.annotation.NonNull;
 
@@ -58,10 +52,12 @@ public class Intake extends SDKSubsystem {
 
     public enum IntakePivotState {
         START,
-        SCORING,
+        MID_SCORING,
+        HIGH_SCORING,
         SPECIMEN_SCORING,
         ROTATED_INTAKE,
         INTAKE,
+        PROTECTED_HOME,
         HOME
     }
 
@@ -89,16 +85,23 @@ public class Intake extends SDKSubsystem {
     }
     public void setWristPos(IntakePivotState intakePivotState) {
         switch (intakePivotState) {
-            case SCORING:
+            case HIGH_SCORING:
                 setWristPosition(Constants.Intake.highScoringWristPos.first, Constants.Intake.highScoringWristPos.second);
+                break;
+            case MID_SCORING:
+                setWristPosition(Constants.Intake.midScoringWristPos.first, Constants.Intake.midScoringWristPos.second);
                 break;
             case SPECIMEN_SCORING:
                 setWristPosition(Constants.Intake.highSpecimenWristPos.first, Constants.Intake.highSpecimenWristPos.second);
                 break;
             case ROTATED_INTAKE:
                 setWristPosition(Constants.Intake.rotatedIntakeWristPos.first, Constants.Intake.rotatedIntakeWristPos.second);
+                break;
             case INTAKE:
                 setWristPosition(Constants.Intake.intakeWristPos.first, Constants.Intake.intakeWristPos.second);
+                break;
+            case PROTECTED_HOME:
+                setWristPosition(Constants.Intake.protectedHomeWristPos.first, Constants.Intake.protectedHomeWristPos.second);
                 break;
             case HOME:
                 setWristPosition(Constants.Intake.homeWristPos.first, Constants.Intake.homeWristPos.second);

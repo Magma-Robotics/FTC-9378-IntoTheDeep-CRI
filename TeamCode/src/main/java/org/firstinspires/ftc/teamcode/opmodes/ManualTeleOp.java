@@ -44,7 +44,7 @@ public class ManualTeleOp extends OpMode {
         Mercurial.gamepad2().rightBumper()
                 .onTrue(Intake.INSTANCE.setClawOpenAndClose());
         Mercurial.gamepad2().rightTrigger().conditionalBindState().greaterThanEqualTo(0.01).bind()
-                .whileTrue(GroupedCommands.INSTANCE.extendSlidesAndArm(Mercurial.gamepad2().rightTrigger().state()));
+                .whileTrue(GroupedCommands.INSTANCE.extendSlidesAndArm(() -> Mercurial.gamepad2().rightTrigger().state()));
     }
 
     @Override

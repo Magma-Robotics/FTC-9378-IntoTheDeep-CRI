@@ -19,7 +19,7 @@ public class Constants {
         public static final double midScoringPos = 5700.0;
         public static final double highSpecimenScoringPos = 2800.0;
         public static final double lowSpecimenScoringPos = 1200.0;
-        public static final double intakePos = 1300.0;
+        public static final double intakePos = 1350.0;
         public static final double homePos = 1500.0;
     }
 
@@ -52,14 +52,15 @@ public class Constants {
         public static final double rotation180Pos = 0.64;
 
         public static final double clawOpenSmallerPos = 0.87;
-        public static final double clawOpenPos = 0.9;
+        public static final double clawOpenPos = 0.97;
         public static final double clawClosedPos = 0.75;
         public static final double clawRegripPos = 0.79;
 
         //pitch and roll
         public static final Pair<Double, Double> homeWristPos = new Pair<>(150.0, 0.0);
-        public static final Pair<Double, Double> rotatedIntakeWristPos = new Pair<>(90.0, 190.0);
-        public static final Pair<Double, Double> intakeWristPos = new Pair<>(90.0, 0.0);
+        public static final Pair<Double, Double> protectedHomeWristPos = new Pair<>(230.0, 0.0);
+        public static final Pair<Double, Double> rotatedIntakeWristPos = new Pair<>(50.0, -200.0);
+        public static final Pair<Double, Double> intakeWristPos = new Pair<>(70.0, 0.0);
         public static final Pair<Double, Double> highScoringWristPos = new Pair<>(240.0, 0.0);
         public static final Pair<Double, Double> midScoringWristPos = new Pair<>(240.0, 0.0);
         public static final Pair<Double, Double> startWristPos = new Pair<>(150.0, 0.0);

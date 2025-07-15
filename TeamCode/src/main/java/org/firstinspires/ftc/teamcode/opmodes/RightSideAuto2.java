@@ -163,7 +163,7 @@ public class RightSideAuto2 extends OpMode {
                         ),
                         new ParallelAction(
                             new SleepAction(0.5),
-                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING))
+                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING))
                         ),
                         new ParallelAction(
                                 //move to submersible
@@ -211,7 +211,7 @@ public class RightSideAuto2 extends OpMode {
                         ),
                         new ParallelAction(
                                 new SleepAction(0.5),
-                                new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING))
+                                new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING))
                         ),
                         new ParallelAction(
                                 //move to submersible
@@ -258,7 +258,7 @@ public class RightSideAuto2 extends OpMode {
                         ),
                         new ParallelAction(
                                 new SleepAction(0.5),
-                                new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING))
+                                new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING))
                         ),
                         new ParallelAction(
                                 //move to submersible

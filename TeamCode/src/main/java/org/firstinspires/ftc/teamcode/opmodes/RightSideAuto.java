@@ -94,7 +94,7 @@ public class RightSideAuto extends OpMode {
                     ),
                     //grab specimen
                     new MercurialAction(Intake.INSTANCE.setClawOpen(false)),
-                    new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING)),
+                    new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING)),
                     new ParallelAction(
                             //move to submersible
                             score2,

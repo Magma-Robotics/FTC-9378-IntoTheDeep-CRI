@@ -10,7 +10,6 @@ import org.firstinspires.ftc.teamcode.subsystems.Drive;
 import org.firstinspires.ftc.teamcode.subsystems.Intake;
 import org.firstinspires.ftc.teamcode.subsystems.Slides;
 
-import dev.frozenmilk.dairy.core.util.supplier.logical.EnhancedBooleanSupplier;
 import dev.frozenmilk.mercurial.Mercurial;
 import dev.frozenmilk.mercurial.bindings.BoundBooleanSupplier;
 
@@ -40,7 +39,7 @@ public class CRI extends OpMode {
         Mercurial.gamepad2().a()
                 .onTrue(GroupedCommands.INSTANCE.intakeToHomeCommand());
         Mercurial.gamepad2().b()
-                .onTrue(GroupedCommands.INSTANCE.setScoringCommand());
+                .onTrue(GroupedCommands.INSTANCE.setHighScoringCommand());
         Mercurial.gamepad2().x()
                 .onTrue(GroupedCommands.INSTANCE.extendIntakeCommand());
         Mercurial.gamepad2().y()
@@ -52,11 +51,18 @@ public class CRI extends OpMode {
         Mercurial.gamepad2().dpadLeft()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE));
         Mercurial.gamepad2().dpadRight()
-                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.SCORING));
-        Mercurial.gamepad2().leftStickButton()
-                .onTrue(Intake.INSTANCE.setIntakeRotation(Constants.Intake.rotation0Pos));
-        Mercurial.gamepad2().rightStickButton()
+                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING));
+        Mercurial.gamepad2().back()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.ROTATED_INTAKE));
+
+        Mercurial.gamepad2().rightTrigger().conditionalBindState().greaterThanEqualTo(0.01).bind()
+                .whileTrue(GroupedCommands.INSTANCE.extendSlidesAndArm(() -> Mercurial.gamepad2().rightTrigger().state()));
+        Mercurial.gamepad2().leftStickY().conditionalBindState().greaterThanEqualTo(0.01).lessThanEqualTo(-0.01).bind()
+                .or(Mercurial.gamepad2().leftStickX().conditionalBindState().greaterThanEqualTo(0.01).lessThanEqualTo(-0.01).bind())
+                .whileTrue(Intake.INSTANCE.setWristControl());
+        Mercurial.gamepad2().rightStickY().conditionalBindState().greaterThanEqualTo(0.01).lessThanEqualTo(-0.01).bind()
+                .whileTrue(Slides.INSTANCE.setSlidePower(() -> Mercurial.gamepad2().rightStickY().state()))
+                .onFalse(Slides.INSTANCE.stopSlides());
     }
 
     @Override
