@@ -112,7 +112,7 @@ public class LeftSideAuto2 extends OpMode {
                                 ),
                                 new SleepAction(2.2)
                         ),
-                        new MercurialAction(Slides.INSTANCE.runToPosition(180)),
+                        new MercurialAction(Slides.INSTANCE.runToPosition(() -> 180)),
                         new SleepAction(0.5),
                         //grab sample
                         new MercurialAction(Intake.INSTANCE.setClawPos(0)),
@@ -143,7 +143,7 @@ public class LeftSideAuto2 extends OpMode {
                                 ),
                                 new SleepAction(2.2)
                         ),
-                        new MercurialAction(Slides.INSTANCE.runToPosition(180)),
+                        new MercurialAction(Slides.INSTANCE.runToPosition(() -> 180)),
                         new SleepAction(0.5),
                         //grab sample
                         new MercurialAction(Intake.INSTANCE.setClawPos(0)),
@@ -175,11 +175,11 @@ public class LeftSideAuto2 extends OpMode {
                                 ),
                                 new SleepAction(2.2)
                         ),
-                        new MercurialAction(Arm.INSTANCE.runToPosition(600)),
+                        new MercurialAction(Arm.INSTANCE.runToPosition(() -> 600)),
                         new SleepAction(0.3),
-                        new MercurialAction(Slides.INSTANCE.runToPosition(600)),
+                        new MercurialAction(Slides.INSTANCE.runToPosition(() -> 600)),
                         new SleepAction(0.3),
-                        new MercurialAction(Arm.INSTANCE.runToPosition(0)),
+                        new MercurialAction(Arm.INSTANCE.runToPosition(() -> 0)),
                         new SleepAction(0.3),
                         //grab sample
                         new MercurialAction(Intake.INSTANCE.setClawPos(0)),

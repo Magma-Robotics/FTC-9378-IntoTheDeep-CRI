@@ -220,12 +220,12 @@ public class Slides extends SDKSubsystem {
 
     public Lambda setSlidePower(DoubleSupplier power) {
         return new Lambda("setSlidePower")
-                .setInit(() -> slidePower(power.getAsDouble()));
+                .setExecute(() -> slidePower(power.getAsDouble()));
     }
 
-    public Lambda runToPosition(double target) {
+    public Lambda runToPosition(DoubleSupplier target) {
         return new Lambda("run_to_position-slides")
-                .setInit(() -> setTarget(target));
+                .setExecute(() -> setTarget(target.getAsDouble()));
                 //.setFinish(() -> controller.get().finished());
     }
     public Lambda setSlidePosition(SlideState slideState) {

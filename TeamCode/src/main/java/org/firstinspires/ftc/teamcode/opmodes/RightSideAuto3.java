@@ -122,7 +122,7 @@ public class RightSideAuto3 extends OpMode {
                                 //moves to first sample
                                 moveToPieces,
                                 //moves to position to grab sample
-                                new MercurialAction(Arm.INSTANCE.runToPosition(300)),
+                                new MercurialAction(Arm.INSTANCE.runToPosition(() -> 300)),
                                 new MercurialAction(Intake.INSTANCE.setIntakeRotation(0.1)),
                                 new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE))
 
@@ -156,7 +156,7 @@ public class RightSideAuto3 extends OpMode {
                                 ),
                                 new SequentialAction(
                                         new SleepAction(0.2),
-                                        new MercurialAction(Arm.INSTANCE.runToPosition(300))
+                                        new MercurialAction(Arm.INSTANCE.runToPosition(() -> 300))
                                 )
                         ),
                         new MercurialAction(Arm.INSTANCE.setArmPosition(Arm.ArmState.HOME)),

@@ -25,6 +25,7 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+import java.util.function.DoubleSupplier;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
@@ -222,10 +223,10 @@ public class Arm extends SDKSubsystem {
                 .setInit(() -> stop());
     }
 
-    public Lambda runToPosition(double target) {
+    public Lambda runToPosition(DoubleSupplier target) {
         return new Lambda("run_to_position-arm")
-                .setInit(() -> setTarget(target))
-                .setFinish(() -> controller.get().finished());
+                .setExecute(() -> setTarget(target.getAsDouble()));
+                //.setFinish(() -> controller.get().finished());
     }
     public Lambda setArmPosition(ArmState armState) {
         return new Lambda("setArmPosition")

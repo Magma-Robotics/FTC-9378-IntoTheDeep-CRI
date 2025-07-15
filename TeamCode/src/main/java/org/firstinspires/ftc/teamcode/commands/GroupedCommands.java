@@ -63,8 +63,8 @@ public class GroupedCommands {
 
     public CommandGroup extendSlidesAndArm(DoubleSupplier triggerValue) {
         return new Parallel(
-                Arm.INSTANCE.runToPosition(800 + triggerValue.getAsDouble()*500),
-                Slides.INSTANCE.runToPosition(400 + triggerValue.getAsDouble()*1400)
+                Arm.INSTANCE.runToPosition(() -> 800 + triggerValue.getAsDouble()*500),
+                Slides.INSTANCE.runToPosition(() -> 400 + triggerValue.getAsDouble()*1400)
         );
     }
 
@@ -151,7 +151,7 @@ public class GroupedCommands {
     public CommandGroup grabSample() {
         return new Parallel(
                 //move arm down
-                Arm.INSTANCE.runToPosition(1150),
+                Arm.INSTANCE.runToPosition(() -> 1150),
                 //grab
                 new Sequential(
                         new Wait(0.06),
@@ -220,7 +220,7 @@ public class GroupedCommands {
 
     public CommandGroup setSpecimenBackwardsCommand() {
         return new Parallel(
-                Arm.INSTANCE.runToPosition(4000),
+                Arm.INSTANCE.runToPosition(() -> 4000),
                 Intake.INSTANCE.setIntakePivotPosition(0.55)
         );
     }

@@ -54,13 +54,13 @@ dependencies {
     implementation "dev.frozenmilk.dairy:CachingHardware:1.0.0"
     implementation "dev.frozenmilk.dairy:Pasteurized:1.0.0"
     implementation("com.acmerobotics.slothboard:dashboard:0.2.3+0.4.16")
-    implementation("com.acmerobotics.roadrunner:ftc:0.1.21") {
+    implementation("com.acmerobotics.roadrunner:ftc:0.1.23") {
         exclude group: "com.acmerobotics.dashboard"
     }
     implementation ("com.acmerobotics.roadrunner:actions:1.0.1"){
         exclude group: "com.acmerobotics.dashboard"
     }
-    implementation ("com.acmerobotics.roadrunner:core:1.0.0") {
+    implementation ("com.acmerobotics.roadrunner:core:1.0.1") {
         exclude group: "com.acmerobotics.dashboard"
     }
 }
