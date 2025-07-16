@@ -56,7 +56,8 @@ public class Intake extends SDKSubsystem {
         HIGH_SCORING,
         SPECIMEN_SCORING,
         ROTATED_INTAKE,
-        INTAKE,
+        FAR_INTAKE,
+        CLOSE_INTAKE,
         PROTECTED_HOME,
         HOME
     }
@@ -97,8 +98,11 @@ public class Intake extends SDKSubsystem {
             case ROTATED_INTAKE:
                 setWristPosition(Constants.Intake.rotatedIntakeWristPos.first, Constants.Intake.rotatedIntakeWristPos.second);
                 break;
-            case INTAKE:
-                setWristPosition(Constants.Intake.intakeWristPos.first, Constants.Intake.intakeWristPos.second);
+            case FAR_INTAKE:
+                setWristPosition(Constants.Intake.farIntakeWristPos.first, Constants.Intake.farIntakeWristPos.second);
+                break;
+            case CLOSE_INTAKE:
+                setWristPosition(Constants.Intake.closeIntakeWristPos.first, Constants.Intake.closeIntakeWristPos.second);
                 break;
             case PROTECTED_HOME:
                 setWristPosition(Constants.Intake.protectedHomeWristPos.first, Constants.Intake.protectedHomeWristPos.second);
@@ -116,7 +120,7 @@ public class Intake extends SDKSubsystem {
         intake.get().setPosition(position);
     }
 
-    public void setWristPosition(double pitch, double roll) {
+    public void setWristPos(double pitch, double roll) {
         if (pitch > 250) {
             pitch = 250;
         }
@@ -134,7 +138,7 @@ public class Intake extends SDKSubsystem {
         intakePivotLeft.get().setPosition(leftServoAngle);
         intakePivotRight.get().setPosition(rightServoAngle);
     }
-
+    //dont use
     public void setRotation(double rotation) {
         //rotatingIntake.get().setPosition(rotation);
     }
@@ -192,13 +196,21 @@ public class Intake extends SDKSubsystem {
         BoundGamepad gamepad2 = Mercurial.gamepad2();
         return new Lambda("setWristControl")
                 .setExecute(() -> {
-                    setWristPosition((-gamepad2.leftStickY().state() + 1)/2*300, gamepad2.leftStickX().state()*220);
-                });
+                    setWristPos((-gamepad2.leftStickY().state() + 1)/2*300, gamepad2.leftStickX().state()*220);
+                })
+                .setFinish(() -> false);
     }
 
     public Lambda setIntakePivot(IntakePivotState intakePivotState) {
         return new Lambda("setIntakePivot")
                 .setInit(() -> setWristPos(intakePivotState));
+    }
+
+    public Lambda setWristPosition(double pitch, double roll) {
+        return new Lambda("setWristPosition")
+                .setInit(() -> {
+                    setWristPos(pitch, roll);
+                });
     }
 
     public Lambda setClawOpen(boolean open) {

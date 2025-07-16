@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.teamcode.Constants.Slides.closeIntakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.highScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.homePos;
-import static org.firstinspires.ftc.teamcode.Constants.Slides.intakePos;
+import static org.firstinspires.ftc.teamcode.Constants.Slides.farIntakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Slides.midScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Slides.highSpecimenScoringPos;
 
 import androidx.annotation.NonNull;
 
@@ -63,7 +63,8 @@ public class Slides extends SDKSubsystem {
         HIGH_SCORING,
         MID_SCORING,
         SPECIMEN_SCORING,
-        INTAKE,
+        FAR_INTAKE,
+        CLOSE_INTAKE,
         HOME
     }
 
@@ -129,7 +130,9 @@ public class Slides extends SDKSubsystem {
 
     public void extend() {
         controller.get().setEnabled(false);
-        slides.get().setPower(1);
+        if (encoder.get().state() < 2100) {
+            slides.get().setPower(1);
+        }
     }
 
     public void stop() {
@@ -154,8 +157,11 @@ public class Slides extends SDKSubsystem {
             case SPECIMEN_SCORING:
                 setTarget(highSpecimenScoringPos);
                 break;
-            case INTAKE:
-                setTarget(intakePos);
+            case FAR_INTAKE:
+                setTarget(farIntakePos);
+                break;
+            case CLOSE_INTAKE:
+                setTarget(closeIntakePos);
                 break;
             case HOME:
                 setTarget(homePos);
@@ -221,12 +227,13 @@ public class Slides extends SDKSubsystem {
     public Lambda setSlidePower(DoubleSupplier power) {
         return new Lambda("setSlidePower")
                 .setExecute(() -> slidePower(power.getAsDouble()));
+                //.setFinish(() -> false);
     }
 
-    public Lambda runToPosition(DoubleSupplier target) {
+    public Lambda runToPosition(double target) {
         return new Lambda("run_to_position-slides")
-                .setExecute(() -> setTarget(target.getAsDouble()));
-                //.setFinish(() -> controller.get().finished());
+                .setExecute(() -> setTarget(target));
+                //.setFinish(() -> false);
     }
     public Lambda setSlidePosition(SlideState slideState) {
         return new Lambda("setSlidePosition")

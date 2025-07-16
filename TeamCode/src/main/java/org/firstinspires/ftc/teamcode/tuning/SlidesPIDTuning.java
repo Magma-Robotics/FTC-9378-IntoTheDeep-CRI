@@ -38,7 +38,7 @@ public class SlidesPIDTuning extends OpMode {
         gamepad2().dpadUp()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME));
         gamepad2().dpadRight()
-                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE));
+                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.FAR_INTAKE));
         gamepad2().dpadLeft()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING));
         gamepad2().dpadDown()
@@ -46,7 +46,7 @@ public class SlidesPIDTuning extends OpMode {
         gamepad2().y()
                 .onTrue(Intake.INSTANCE.setClawOpen(false));
         gamepad2().b()
-                .onTrue(Slides.INSTANCE.setSlidePosition(Slides.SlideState.INTAKE));
+                .onTrue(Slides.INSTANCE.setSlidePosition(Slides.SlideState.FAR_INTAKE));
         gamepad2().a()
                 .onTrue(Slides.INSTANCE.setSlidePosition(Slides.SlideState.HOME));
         gamepad2().x()

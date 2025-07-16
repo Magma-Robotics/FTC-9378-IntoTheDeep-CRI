@@ -17,9 +17,10 @@ public class Constants {
         public static final String rightPivot = "rightPivot";
         public static final double highScoringPos = 5700.0;
         public static final double midScoringPos = 5700.0;
-        public static final double highSpecimenScoringPos = 2800.0;
+        public static final double highSpecimenScoringPos = 2700.0;
         public static final double lowSpecimenScoringPos = 1200.0;
-        public static final double intakePos = 1350.0;
+        public static final double farIntakePos = 1350.0;
+        public static final double closeIntakePos = 400.0;
         public static final double homePos = 1500.0;
     }
 
@@ -28,9 +29,10 @@ public class Constants {
         public static final String slides = "slides";
         public static final double highScoringPos = 2000.0;
         public static final double midScoringPos = 500.0;
-        public static final double highSpecimenScoringPos = 550;
+        public static final double highSpecimenScoringPos = 450;
         public static final double lowSpecimenScoringPos = 0.0;
-        public static final double intakePos = 1800.0;
+        public static final double farIntakePos = 1800.0;
+        public static final double closeIntakePos = 300.0;
         public static final double homePos = 0.0;
     }
 
@@ -60,7 +62,8 @@ public class Constants {
         public static final Pair<Double, Double> homeWristPos = new Pair<>(150.0, 0.0);
         public static final Pair<Double, Double> protectedHomeWristPos = new Pair<>(230.0, 0.0);
         public static final Pair<Double, Double> rotatedIntakeWristPos = new Pair<>(50.0, -200.0);
-        public static final Pair<Double, Double> intakeWristPos = new Pair<>(70.0, 0.0);
+        public static final Pair<Double, Double> farIntakeWristPos = new Pair<>(70.0, 0.0);
+        public static final Pair<Double, Double> closeIntakeWristPos = new Pair<>(90.0, 0.0);
         public static final Pair<Double, Double> highScoringWristPos = new Pair<>(240.0, 0.0);
         public static final Pair<Double, Double> midScoringWristPos = new Pair<>(240.0, 0.0);
         public static final Pair<Double, Double> startWristPos = new Pair<>(150.0, 0.0);

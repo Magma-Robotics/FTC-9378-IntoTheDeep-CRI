@@ -44,7 +44,7 @@ public class TestTeleop extends OpMode {
         Mercurial.gamepad2().dpadDown()
                 .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.HOME));
         Mercurial.gamepad2().dpadLeft()
-                .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.INTAKE));
+                .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.FAR_INTAKE));
         Mercurial.gamepad2().dpadRight()
                 .onTrue(Intake.INSTANCE.setIntakePivot(IntakePivotState.HIGH_SCORING));
         Mercurial.gamepad2().leftStickButton()
@@ -56,11 +56,6 @@ public class TestTeleop extends OpMode {
 
     @Override
     public void loop() {
-        if (Mercurial.gamepad1().rightBumper().onTrue()) {
-            Drive.INSTANCE.setDefaultCommand(Drive.INSTANCE.slowDriveCommand(true));
-        }
-        if (Mercurial.gamepad1().rightBumper().onFalse()) {
-            Drive.INSTANCE.setDefaultCommand(Drive.INSTANCE.driveCommand(true));
-        }
+
     }
 }

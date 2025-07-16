@@ -1,11 +1,11 @@
 package org.firstinspires.ftc.teamcode.subsystems;
 
+import static org.firstinspires.ftc.teamcode.Constants.Arm.closeIntakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.highScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.homePos;
-import static org.firstinspires.ftc.teamcode.Constants.Arm.intakePos;
+import static org.firstinspires.ftc.teamcode.Constants.Arm.farIntakePos;
 import static org.firstinspires.ftc.teamcode.Constants.Arm.midScoringPos;
-import static org.firstinspires.ftc.teamcode.Constants.Arm.highSpecimenScoringPos;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmD;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmI;
 import static org.firstinspires.ftc.teamcode.config.ArmPIDConfig.ArmP;
@@ -25,7 +25,6 @@ import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-import java.util.function.DoubleSupplier;
 
 import dev.frozenmilk.dairy.core.dependency.Dependency;
 import dev.frozenmilk.dairy.core.dependency.annotation.SingleAnnotation;
@@ -65,7 +64,8 @@ public class Arm extends SDKSubsystem {
         HIGH_SCORING,
         MID_SCORING,
         SPECIMEN_SCORING,
-        INTAKE,
+        FAR_INTAKE,
+        CLOSE_INTAKE,
         HOME
     }
 
@@ -157,8 +157,11 @@ public class Arm extends SDKSubsystem {
             case SPECIMEN_SCORING:
                 setTarget(highSpecimenScoringPos);
                 break;
-            case INTAKE:
-                setTarget(intakePos);
+            case FAR_INTAKE:
+                setTarget(farIntakePos);
+                break;
+            case CLOSE_INTAKE:
+                setTarget(closeIntakePos);
                 break;
             case HOME:
                 setTarget(homePos);
@@ -223,10 +226,10 @@ public class Arm extends SDKSubsystem {
                 .setInit(() -> stop());
     }
 
-    public Lambda runToPosition(DoubleSupplier target) {
+    public Lambda runToPosition(double target) {
         return new Lambda("run_to_position-arm")
-                .setExecute(() -> setTarget(target.getAsDouble()));
-                //.setFinish(() -> controller.get().finished());
+                .setExecute(() -> setTarget(target));
+                //.setFinish(() -> false);
     }
     public Lambda setArmPosition(ArmState armState) {
         return new Lambda("setArmPosition")

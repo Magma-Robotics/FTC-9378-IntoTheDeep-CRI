@@ -54,6 +54,8 @@ public class Drive extends SDKSubsystem {
     private final Cell<CachingDcMotor> rightFront = subsystemCell(() -> new CachingDcMotor(getHardwareMap().get(DcMotor.class, Constants.Drive.rightFront)));
     private final Cell<CachingDcMotor> rightBack = subsystemCell(() -> new CachingDcMotor(getHardwareMap().get(DcMotor.class, Constants.Drive.rightBack)));
 
+    private boolean slowMode = false;
+
     // Retrieve the IMU from the hardware map
     final Cell<IMU> imu = subsystemCell(() -> getHardwareMap().get(IMU.class, "imu"));
     // Adjust the orientation parameters to match your robot
@@ -84,6 +86,13 @@ public class Drive extends SDKSubsystem {
 
                     if (gamepad1.a().onTrue()) {
                         imu.get().resetYaw();
+                    }
+
+                    if (gamepad1.rightBumper().onTrue() && !slowMode) {
+                        slowMode = true;
+                    }
+                    else if (gamepad1.rightBumper().onTrue() && slowMode) {
+                        slowMode = false;
                     }
 
                     double botHeading = imu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
@@ -129,60 +138,6 @@ public class Drive extends SDKSubsystem {
                         leftBack.get().setPower(backLeftPower2);
                         rightFront.get().setPower(frontRightPower2);
                         rightBack.get().setPower(backRightPower2);
-                    }
-                    /*leftFront.get().setPower(y);
-                    leftBack.get().setPower(y);
-                    rightFront.get().setPower(-gamepad1.rightStickY().state());
-                    rightBack.get().setPower(-gamepad1.rightStickY().state());*/
-                })
-                .setFinish(() -> false);
-    }
-
-    public Lambda slowDriveCommand(boolean isFieldCentric) {
-        BoundGamepad gamepad1 = Mercurial.gamepad1();
-        return new Lambda("mecanum-drive")
-                .setRequirements(this)
-                .setInit(() -> {})
-                .setExecute(() -> {
-                    double y = gamepad1.leftStickY().state();
-                    double x = gamepad1.leftStickX().state();
-                    double rx = gamepad1.rightStickX().state();
-
-                    if (gamepad1.a().onTrue()) {
-                        imu.get().resetYaw();
-                    }
-
-                    double botHeading = imu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-
-                    // Rotate the movement direction counter to the bot's rotation
-                    double rotX = x * Math.cos(-botHeading) - y * Math.sin(-botHeading);
-                    double rotY = x * Math.sin(-botHeading) + y * Math.cos(-botHeading);
-
-                    rotX *= 1.1;
-
-                    double denominator = Math.max(Math.abs(rotY) + Math.abs(rotX) + Math.abs(rx), 1);
-                    double frontLeftPower = (rotY + rotX + rx) / denominator;
-                    double backLeftPower = (rotY - rotX + rx) / denominator;
-                    double frontRightPower = (rotY - rotX - rx) / denominator;
-                    double backRightPower = (rotY + rotX - rx) / denominator;
-
-                    double denominator2 = Math.max(Math.abs(y) + Math.abs(x) + Math.abs(rx), 1);
-                    double frontLeftPower2 = (y + x + rx) / denominator;
-                    double backLeftPower2 = (y - x + rx) / denominator;
-                    double frontRightPower2 = (y - x - rx) / denominator;
-                    double backRightPower2 = (y + x - rx) / denominator;
-
-                    if (isFieldCentric) {
-                        leftFront.get().setPower(frontLeftPower / 5);
-                        leftBack.get().setPower(backLeftPower / 5);
-                        rightFront.get().setPower(frontRightPower / 5);
-                        rightBack.get().setPower(backRightPower / 5);
-                    }
-                    else {
-                        leftFront.get().setPower(frontLeftPower2 / 5);
-                        leftBack.get().setPower(backLeftPower2 / 5);
-                        rightFront.get().setPower(frontRightPower2 / 5);
-                        rightBack.get().setPower(backRightPower2 / 5);
                     }
                     /*leftFront.get().setPower(y);
                     leftBack.get().setPower(y);

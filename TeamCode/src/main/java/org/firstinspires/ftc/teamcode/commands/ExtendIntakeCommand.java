@@ -21,11 +21,11 @@ public class ExtendIntakeCommand implements Command {
     @Override
     public void initialise() {
         new Parallel(
-                Slides.INSTANCE.setSlidePosition(SlideState.INTAKE),
+                Slides.INSTANCE.setSlidePosition(SlideState.FAR_INTAKE),
                 new Sequential(
                         new Wait(1),
                         new Parallel(
-                                Intake.INSTANCE.setIntakePivot(IntakePivotState.INTAKE),
+                                Intake.INSTANCE.setIntakePivot(IntakePivotState.FAR_INTAKE),
                                 Intake.INSTANCE.setClawOpen(false)
                         )
                 )

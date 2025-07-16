@@ -74,7 +74,7 @@ public class RightSideAuto extends OpMode {
                     ),
                     //scores
                     new ParallelAction(
-                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE)),
+                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.FAR_INTAKE)),
                             new SequentialAction(
                                     new SleepAction(1),
                                     new MercurialAction(Intake.INSTANCE.setClawOpen(true))
@@ -106,7 +106,7 @@ public class RightSideAuto extends OpMode {
                     ),
                     //scores
                     new ParallelAction(
-                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE)),
+                            new MercurialAction(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.FAR_INTAKE)),
                             new SequentialAction(
                                     new SleepAction(1),
                                     new MercurialAction(Intake.INSTANCE.setClawOpen(true))

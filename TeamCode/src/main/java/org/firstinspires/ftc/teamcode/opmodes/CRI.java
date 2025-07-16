@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.opmodes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.commands.GroupedCommands;
 import org.firstinspires.ftc.teamcode.subsystems.Arm;
 import org.firstinspires.ftc.teamcode.subsystems.Drive;
@@ -49,7 +48,7 @@ public class CRI extends OpMode {
         Mercurial.gamepad2().dpadDown()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HOME));
         Mercurial.gamepad2().dpadLeft()
-                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.INTAKE));
+                .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.FAR_INTAKE));
         Mercurial.gamepad2().dpadRight()
                 .onTrue(Intake.INSTANCE.setIntakePivot(Intake.IntakePivotState.HIGH_SCORING));
         Mercurial.gamepad2().back()

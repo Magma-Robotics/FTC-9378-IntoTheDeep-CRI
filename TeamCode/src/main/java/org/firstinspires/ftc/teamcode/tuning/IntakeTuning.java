@@ -26,7 +26,7 @@ public class IntakeTuning extends OpMode {
 
     @Override
     public void loop() {
-        Intake.INSTANCE.setWristPosition(pitch, roll);
+        Intake.INSTANCE.setWristPos(pitch, roll);
         Intake.INSTANCE.setClawPosition(intake);
         telemetry.update();
     }
