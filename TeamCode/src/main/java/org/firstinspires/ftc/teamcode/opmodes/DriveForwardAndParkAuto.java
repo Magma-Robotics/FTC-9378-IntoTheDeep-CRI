@@ -28,7 +28,7 @@ import dev.frozenmilk.mercurial.Mercurial;
 @Config
 @Autonomous(name = "DriveForwardAndPark", group = "Autonomous")
 
-public class DriveForwardAndPark extends OpMode {
+public class DriveForwardAndParkAuto extends OpMode {
     private final Pose2d initialPose = new Pose2d(0, -61.5, Math.toRadians(90));
     private Action park;
     private MecanumDrive drive;
@@ -47,7 +47,7 @@ public class DriveForwardAndPark extends OpMode {
         SilkRoad.RunAsync(
                 new SequentialAction(
                         new MercurialAction(Intake.INSTANCE.setClawOpen(false)),
-                        new SleepAction(25),
+                        new SleepAction(24),
                         new MercurialAction(Arm.INSTANCE.runToPosition(2700)),
                         new MercurialAction(Slides.INSTANCE.runToPosition(700)),
                         new SleepAction(1.2),
